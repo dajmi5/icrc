@@ -6,9 +6,9 @@ class HelpdeskTicket(models.Model):
     _inherit = ['helpdesk.ticket', "tier.validation"]
 
     _tier_validation_buttons_xpath = "/form/header/field[@name='stage_id']"
-    _state_from = ["draft", "open", "pending"]
+    _state_from = ["open"]
     _state_to = ["done"]
-    _cancel_state = ["inactive"]
+    _cancel_state = ["cancel"]
     _tier_validation_manual_config = False
 
     @api.model
@@ -17,8 +17,8 @@ class HelpdeskTicket(models.Model):
         Changing some Partner fields forces Tier Validation to be reevaluated.
         Out of the box these are is_company and parent_id.
         Other can be added extending this method.
+
         """
-        # IDEA: make it a System Parameter?
         return [
             "partner_id",
             "project_id",
@@ -26,11 +26,21 @@ class HelpdeskTicket(models.Model):
             "category_id",
         ]
 
+    def _get_default_stage_id(self, vals):
+        self.ensure_one()  # just in case.. need to check multi write options!
+        return self.env['helpdesk.ticket.stage'].search([], limit=1)
+
+
+
+
     def write(self, vals):
+        # temporary disable until needed
         # Changing certain fields requires a new validation process
-        revalidate_fields = self._ticket_tier_revalidation_fields(vals)
-        if any(x in revalidate_fields for x in vals.keys()):
-            vals["stage_id"] = self._get_default_stage_id().id
+
+        # revalidate_fields = self._ticket_tier_revalidation_fields(vals)
+        # if any(x in revalidate_fields for x in vals.keys()):
+        #     vals["stage_id"] = self._get_default_stage_id(vals)
+
         # Tier Validation does not work with Stages, only States :-(
         # Workaround is to signal state transition adding it to the write values
         if "stage_id" in vals:
@@ -38,6 +48,6 @@ class HelpdeskTicket(models.Model):
             stage = self.env["helpdesk.ticket.stage"].browse(stage_id)
             vals["state"] = stage.state
         res = super().write(vals)
-        if "stage_id" in vals and vals.get("stage_id") in self._state_from:
-            self.restart_validation()
+        # if "stage_id" in vals and vals.get("stage_id") in self._state_from:
+        #     self.restart_validation()
         return res
