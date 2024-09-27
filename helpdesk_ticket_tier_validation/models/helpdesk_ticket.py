@@ -6,8 +6,8 @@ class HelpdeskTicket(models.Model):
     _inherit = ['helpdesk.ticket', "tier.validation"]
 
     _tier_validation_buttons_xpath = "/form/header/field[@name='stage_id']"
-    _state_from = ["draft", "cancel"]
-    _state_to = ["confirmed"]
+    _state_from = ["draft", "open", "pending"]
+    _state_to = ["done"]
     _cancel_state = ["inactive"]
     _tier_validation_manual_config = False
 
