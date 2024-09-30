@@ -46,7 +46,12 @@ class HelpdeskTicket(models.Model):
         if "stage_id" in vals:
             stage_id = vals.get("stage_id")
             stage = self.env["helpdesk.ticket.stage"].browse(stage_id)
-            vals["state"] = stage.state
+            # watch out for multi write!!
+            if stage.state in self._state_to and self.need_validation:
+                del vals['stage_id']
+                self.restart_validation()
+            else:
+                vals["state"] = stage.state
         res = super().write(vals)
         # if "stage_id" in vals and vals.get("stage_id") in self._state_from:
         #     self.restart_validation()

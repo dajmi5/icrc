@@ -12,7 +12,7 @@
         'base_tier_validation'
     ],
     'data': [
-
+        'views/helpdesk_ticket_views.xml'
     ],
     'qweb': [
 
