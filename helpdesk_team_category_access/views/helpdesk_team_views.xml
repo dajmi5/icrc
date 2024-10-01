@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_helpdesk_team_form" model="ir.ui.view">
+        <field name="name">view_helpdesk_team_form</field>
+        <field name="model">helpdesk.ticket.team</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.view_helpdesk_team_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Allowed categories" name="categ">
+                    <field name="category_ids" widget="many2many_tags"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
