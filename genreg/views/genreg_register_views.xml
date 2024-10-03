@@ -1,0 +1,91 @@
+<odoo>
+
+    <record id="view_genreg_register_form" model="ir.ui.view">
+        <field name="name">genreg.register.form</field>
+        <field name="model">genreg.register</field>
+        <field name="arch" type="xml">
+            <form string="General Register">
+                <sheet>
+                     <group>
+                        <field name="name" />
+                        <field name="sequence"/>
+                    </group>
+
+                    <group groups="genreg.group_genreg_user_manager">
+                        <field name="sec_editor_group_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                        <field name="sec_manager_group_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                    </group>
+                    <!-- Add the One2many field to show linked records -->
+                    <notebook>
+                        <page name="Records" string="Records">
+                            <field name="record_ids" context="{'default_order': 'create_date desc'}">
+                                <tree string="Records" view_id="genreg.record.tree" editable="top">
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_genreg_register_tree" model="ir.ui.view">
+        <field name="name">genreg.register.tree</field>
+        <field name="model">genreg.register</field>
+        <field name="arch" type="xml">
+            <tree string="General Register">
+                <field name="name"/>
+                <field name="sequence"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_genreg_register_records" model="ir.actions.act_window">
+        <field name="name">Related Records</field>
+        <field name="res_model">genreg.record</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="genreg_record_tree_view"/>
+        <field name="context">
+            {'default_doc_register_id': active_id}
+        </field>
+        <field name="domain">[('doc_register_id', '=', active_id)]</field>
+    </record>
+
+    <record id="view_genreg_register_kanban" model="ir.ui.view">
+        <field name="name">genreg.register.kanban</field>
+        <field name="model">genreg.register</field>
+        <field name="arch" type="xml">
+            <kanban string="General Register">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_details">
+                            <a name="%(action_genreg_register_records)d"
+                               type="action">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                            </a>
+                            <div>
+                                <field name="sequence"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_genreg_register" model="ir.actions.act_window">
+        <field name="name">General Register</field>
+        <field name="res_model">genreg.register</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="view_genreg_register_kanban"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new General Register entry.
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

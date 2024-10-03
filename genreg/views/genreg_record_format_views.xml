@@ -1,0 +1,31 @@
+<odoo>
+    <record id="genreg_record_format_form_view" model="ir.ui.view">
+        <field name="name">genreg.record.format.form</field>
+        <field name="model">genreg.record.format</field>
+        <field name="arch" type="xml">
+            <form string="RecordFormat Configuration">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="genreg_record_format_tree_view" model="ir.ui.view">
+        <field name="name">genreg.record.format.tree</field>
+        <field name="model">genreg.record.format</field>
+        <field name="arch" type="xml">
+            <tree string="Register Types">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="genreg_record_format_action" model="ir.actions.act_window">
+        <field name="name">Record Formats</field>
+        <field name="res_model">genreg.record.format</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
