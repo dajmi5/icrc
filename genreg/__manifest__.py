@@ -9,8 +9,9 @@
     ],
     'data': [
         'data/genreg_data.xml',
-        'security/ir.model.access.csv',
         'security/genreg_security.xml',
+        'security/ir.model.access.csv',
+
         'data/genreg.confidentiality.csv',
         'data/genreg.record.format.csv',
         'data/genreg.record.doctype.csv',
