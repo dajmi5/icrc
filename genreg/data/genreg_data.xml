@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_genreg_category">
+            <field name="name">General Register</field>
+            <field name="description">Manages GR Security</field>
+            <field name="sequence">9</field>
+        </record>
+    </data>
+</odoo>
