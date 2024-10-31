@@ -1,5 +1,16 @@
 from odoo import fields, models
-
+my_rating=[
+            (1, 1),
+            (2, 2),
+            (3, 3),
+            (4, 4),
+            (5, 5),
+            (6, 6),
+            (7, 7),
+            (8, 8),
+            (9, 9),
+            (10, 10)
+]
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -16,35 +27,13 @@ class ResPartner(models.Model):
     )
 
     power_influence = fields.Selection(
-        selection=[
-            (1, 1),
-            (2, 2),
-            (3, 3),
-            (4, 4),
-            (5, 5),
-            (6, 6),
-            (7, 7),
-            (8, 8),
-            (9, 9),
-            (10, 10),
-        ],
+        selection=my_rating,
         string='Power & Influence',
         help='Level of power and influence (1-10)'
     )
 
     attitude_icrc = fields.Selection(
-        selection=[
-            (1, 1),
-            (2, 2),
-            (3, 3),
-            (4, 4),
-            (5, 5),
-            (6, 6),
-            (7, 7),
-            (8, 8),
-            (9, 9),
-            (10, 10),
-        ],
+        selection=my_rating,
         string='Attitude towards the ICRC',
         help='Attitude towards the ICRC (1-10)'
     )
