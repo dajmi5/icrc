@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- New Action to Open Custom Contact Form -->
-    <record id="action_icontact_form" model="ir.actions.act_window">
-        <field name="name">Icontact Form</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_icontact_form"/>
-    </record>
-
-    <!-- New Menu Item for Custom Contact Form -->
-    <menuitem id="menu_icontact_contact_form"
-              name="IContacts"
-              parent="contacts.menu_contacts"
-              action="action_icontact_form"
-              sequence="10"/>
-
     <!-- New Form View Definition -->
     <record id="view_icontact_form" model="ir.ui.view">
         <field name="name">res.partner.form.custom</field>
@@ -203,4 +188,20 @@
             </form>
         </field>
     </record>
+    <!-- New Action to Open Custom Contact Form -->
+    <record id="action_icontact_form" model="ir.actions.act_window">
+        <field name="name">Icontact Form</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_icontact_form"/>
+    </record>
+
+    <!-- New Menu Item for Custom Contact Form -->
+    <menuitem id="menu_icontact_contact_form"
+              name="IContacts"
+              parent="contacts.menu_contacts"
+              action="action_icontact_form"
+              sequence="10"/>
+
+
 </odoo>
