@@ -44,3 +44,5 @@ class ResPartner(models.Model):
     social_media_1 = fields.Char(string='Social Media 1', help="Link to the first social media profile")
     social_media_2 = fields.Char(string='Social Media 2', help="Link to the second social media profile")
     social_media_3 = fields.Char(string='Social Media 3', help="Link to the third social media profile")
+    email_private = fields.Char(string='Email private',)
+    report_to = fields.Many2one("res.partner", "Report to")
