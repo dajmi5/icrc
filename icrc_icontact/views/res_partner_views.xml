@@ -228,7 +228,7 @@
                 <field name="social_media_1" widget="url" optional="hide"/>
                 <field name="social_media_2" widget="url" optional="hide"/>
                 <field name="social_media_3" widget="url" optional="hide"/>
-                <field name="email_private" groups="custom_contact_fields.group_custom_contact_contributor"/>
+                <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
             </tree>
         </field>
     </record>
