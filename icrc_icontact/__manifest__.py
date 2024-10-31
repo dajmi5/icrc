@@ -11,6 +11,7 @@
         'partner_contact_gender'
     ],
     'data': [
+        'security/security_groups.xml',
         'views/res_partner_views.xml',
     ],
     'installable': True,
