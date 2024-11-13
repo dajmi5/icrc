@@ -1,6 +1,12 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
-my_rates = [
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    @api.model
+    def _get_rating_sel(self):
+        return [
             (1, "1"),
             (2, "2"),
             (3, "3"),
@@ -11,10 +17,7 @@ my_rates = [
             (8, "8"),
             (9, "9"),
             (10, "10"),
-        ],
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
-
+        ]
     level_of_interest = fields.Selection(
         selection=[
             ('positive', 'Positive'),
@@ -37,13 +40,13 @@ class ResPartner(models.Model):
     )
 
     power_influence = fields.Selection(
-        selection=my_rates,
+        selection=_get_rating_sel,
         string='Power & Influence',
         help='Level of power and influence (1-10)'
     )
 
     attitude_icrc = fields.Selection(
-        selection=my_rates,
+        selection=_get_rating_sel,
         string='Attitude towards the ICRC',
         help='Attitude towards the ICRC (1-10)'
     )
