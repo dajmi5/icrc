@@ -26,6 +26,16 @@ class ResPartner(models.Model):
         default='medium'
     )
 
+    contact_type = fields.Selection(
+        selection=[
+            ('armed', 'Armed and Security Forces'),
+            ('civil', 'Civil society'),
+            ('ngo', 'Diplomatic corps/Donors'),
+            ('ngo', 'IO/NGO'),
+        ],
+        string='Type'
+    )
+
     power_influence = fields.Selection(
         selection=my_rates,
         string='Power & Influence',
