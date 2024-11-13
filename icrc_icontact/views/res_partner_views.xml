@@ -216,27 +216,47 @@
     </record>
 
     <record id="view_icontact_list" model="ir.ui.view">
-        <field name="name">res.partner.list.custom</field>
+        <field name="name">res.partner.list.contact</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Custom Contact List">
+                <field name="parent_id"/>
+                <field name="name"/>
+                <field name="contact_type"/>
+                <field name="report_to"/>
+                <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
+                <field name="land_line"/>
+                <field name="social_media_1" widget="url" optional="hide"/>
+                <field name="social_media_2" widget="url" optional="hide"/>
+                <field name="social_media_3" widget="url" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_stakeholder_list" model="ir.ui.view">
+        <field name="name">res.partner.list.stakeholder</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <tree string="Custom Contact List">
                 <field name="name"/>
+                <field name="contact_type"/>
                 <field name="phone"/>
-                <field name="email"/>
+                <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
                 <field name="level_of_interest" optional="show"/>
                 <field name="power_influence" optional="show"/>
                 <field name="attitude_icrc" optional="show"/>
                 <field name="icrc_focal_point" optional="show"/>
                 <field name="land_line"/>
-                <field name="bio_url" widget="url"/>
+                <field name="website" widget="url"/>
                 <field name="social_media_1" widget="url" optional="hide"/>
                 <field name="social_media_2" widget="url" optional="hide"/>
                 <field name="social_media_3" widget="url" optional="hide"/>
-                <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
+
             </tree>
         </field>
     </record>
 
+    <!-- Contact action definition -->
     <record id="action_icontact" model="ir.actions.act_window">
         <field name="name">Icontact Form</field>
         <field name="res_model">res.partner</field>
@@ -254,6 +274,20 @@
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_icontact_form"/>
         <field name="act_window_id" ref="action_icontact"/>
+    </record>
+
+    <!-- Stakeholder action definition -->
+    <record id="action_stakeholder" model="ir.actions.act_window">
+        <field name="name">Steak holder Action</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_stakeholder_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_stakeholder_list"/>
+        <field name="act_window_id" ref="action_stakeholder"/>
     </record>
 
     <!-- New Menu Item for Custom Contact Form -->
