@@ -9,7 +9,7 @@ class ResPartner(models.Model):
     def _default_operating_unit_ids(self):
         if self.parent_id and self.parent_id.operating_unit_ids:
             return [(6, 0, self.parent_id.operating_unit_ids.ids)]
-        default_ou = self.env["res.users"].operating_unit_default_get(self.env.uid)
+        default_ou = self.env.user.operating_unit_default_get()
         if default_ou:
             return [
                 (6,0,default_ou.ids)
