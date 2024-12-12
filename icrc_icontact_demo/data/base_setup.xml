@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2021 ICRC
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo noupdate="1">
+
+    <!-- set minimal_user rights -->
+    <!--<function model="res.users" name="write">
+        <value eval="[ref('base.default_user')]"/>
+        <value eval="{'groups_id':[(6, 0, (
+            ref('product.group_sale_pricelist'),
+            ref('product.group_product_pricelist'),
+            ref('base.group_partner_manager'),
+            ref('stock.group_lot_on_delivery_slip'),
+            ref('base.group_user'),
+            ref('sale.group_auto_done_setting'),
+            ref('stock.group_production_lot'),
+            ref('stock.group_stock_multi_locations'),
+            ref('uom.group_uom'),
+            ref('product.group_product_variant'),
+            ref('stock.group_adv_location'),
+            ref('mrp.group_mrp_routings'),
+            ref('base.group_multi_currency'),
+            ref('sale_management.group_sale_order_template'),
+            ref('account.group_show_line_subtotals_tax_excluded'),
+        ))]}"/>
+    </function>-->
+
+
+</odoo>
