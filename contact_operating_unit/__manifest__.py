@@ -8,7 +8,7 @@
     "version": "16.0.1.0.1",
     "author": "ICRC",
     "category": "Product",
-    "depends": ["base", "operating_unit"],
+    "depends": ["base", "operating_unit", "operating_unit_hierarchy"],
     "license": "LGPL-3",
     "data": [
         "security/res_partner_security.xml",
