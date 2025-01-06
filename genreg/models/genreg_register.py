@@ -1,5 +1,6 @@
+import ast
 import logging
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 _logger = logging.getLogger(__name__)
 
@@ -27,9 +28,6 @@ class GenRegRegister(models.Model):
         string="Manager Groups"
     )
 
-    # to show records on the form
-    record_ids = fields.One2many('genreg.record', 'doc_register_id', string='Records')
-
     can_edit = fields.Boolean(
         string="Can Edit",
         compute="_compute_can_edit",
@@ -43,3 +41,31 @@ class GenRegRegister(models.Model):
             is_manager = self.env.user.has_group('genreg.group_genreg_user_manager') or \
                          any(group.id in self.env.user.groups_id.ids for group in record.sec_manager_group_ids)
             record.can_edit = is_manager
+    @api.model
+    def get_action(self,action_name):
+        _logger.info(f'Action called: {action_name}')
+        return False
+
+    @api.model
+    def _get_view(self, view_id=None, view_type='form', **options):
+        _logger.info(f'Action called _get_view: {view_id}')
+        arch, view = super()._get_view(view_id, view_type, **options)
+        # if view_type == 'form':
+            # arch = self._view_get_address(arch)
+        return arch, view
+
+    def get_last_update_or_default(self):
+        self.ensure_one()
+        return {
+            'status': "ok",
+            'name': self.name,
+        }
+
+    def action_view_records(self):
+        action = self.env['ir.actions.act_window'].with_context({'active_id': self.id})._for_xml_id(
+            'genreg.action_genreg_register_records')
+        action['display_name'] = _("%(name)s", name=self.name)
+        context = action['context'].replace('active_id', str(self.id))
+        context = ast.literal_eval(context)
+        action['context'] = context
+        return action

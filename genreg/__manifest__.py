@@ -9,9 +9,9 @@
     ],
     'data': [
         'data/genreg_data.xml',
+
         'security/genreg_security.xml',
         'security/ir.model.access.csv',
-
         'data/genreg.confidentiality.csv',
         'data/genreg.record.format.csv',
         'data/genreg.record.doctype.csv',
@@ -26,6 +26,8 @@
         'web.assets_backend': [
             'genreg/static/src/js/copy_doc_ref_button.js',
             'genreg/static/src/js/copy_doc_ref_template.xml',
+            'genreg/static/src/components/**/*',
+            'genreg/static/src/views/**/*',
         ],
     },
     "application": True,
