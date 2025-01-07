@@ -4,7 +4,7 @@
         <field name="name">genreg.record.tree</field>
         <field name="model">genreg.record</field>
         <field name="arch" type="xml">
-            <tree string="Register">
+            <tree string="Register" js_class="genreg_record_list">
                 <field name="doc_register_id" optional="hide" />
                 <field name="doc_ref"/>
                 <field name="doc_date"/>
@@ -28,15 +28,33 @@
         </field>
     </record>
 
-    <record id="action_open_partner_search" model="ir.actions.act_window">
-        <field name="name">Select Action Partners</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
-        <field name="context">{"default_for_action_ids": active_id}</field>  <!-- Use JSON format -->
-        <field name="target">new</field>
+    <record id="genreg_record_all_tree_view" model="ir.ui.view">
+        <field name="name">genreg.record.tree</field>
+        <field name="model">genreg.record</field>
+        <field name="arch" type="xml">
+            <tree string="Register" create="false">
+                <field name="doc_register_id" optional="hide" />
+                <field name="doc_ref"/>
+                <field name="doc_date"/>
+                <!-- Column to display "C" in red when the status is "Cancelled" -->
+                <!-- Display the "C" when the status is 'Cancelled' -->
+                <field name="status" invisible="true"/>
+                <field name="cancelled_display" string="C"
+                       decoration-danger="status == 'cancelled'"/>
+                <field name="doctype_id"/>
+                <field name="format_code"/>
+                <field name="doctype_id"/>
+                <field name="for_action_ids" widget="many2many_tags"/>
+                <field name="for_info_ids" widget="many2many_tags"/>
+                <field name="doc_subject"/>
+                <field name="doc_initiator"/>
+                <field name="doc_sender"/>
+                <field name="confidentiality_code"/>
+                <field name="filing"/>
+                <field name="remarks" string="Rem"/>
+            </tree>
+        </field>
     </record>
-
 
     <record id="genreg_record_form_view" model="ir.ui.view">
         <field name="name">register.form</field>
@@ -45,6 +63,7 @@
             <form string="General Register">
                 <!-- Main heading -->
                 <header>
+
                     <field name="doc_ref" readonly="1" widget="char" class="oe_highlight"
                            style="font-size:24px; font-weight:bold;"/>
                     <field name="doc_ref" widget="CopyDocRefButton"/>
@@ -89,5 +108,13 @@
         <field name="res_model">genreg.record</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="genreg_record_tree_view"/>
+        <field name="domain">[('doc_register_id', '=', active_id)]</field>
+    </record>
+
+    <record id="genreg_record_action_all" model="ir.actions.act_window">
+        <field name="name">General Register</field>
+        <field name="res_model">genreg.record</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="genreg_record_all_tree_view"/>
     </record>
 </odoo>

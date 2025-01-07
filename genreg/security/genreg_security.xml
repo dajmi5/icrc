@@ -25,7 +25,7 @@
             <field name="groups" eval="[(4, ref('group_genreg_user_standard'))]"/>
         </record>
 
-        <record id="genreg_register_manager_rule" model="ir.rule">
+        <record id="genreg_register_db_manager_rule" model="ir.rule">
             <field name="name">Manager GRs - Full Access</field>
             <field ref="model_genreg_register" name="model_id"/>
             <field name="domain_force">[('sec_manager_group_ids', 'in', user.groups_id.ids)]</field>
@@ -36,16 +36,11 @@
             <field name="groups" eval="[(4, ref('group_genreg_user_standard'))]"/>
         </record>
 
-
-        <record id="genreg_register_manager_rule" model="ir.rule">
+        <record id="genreg_register_global_manager_rule" model="ir.rule">
             <field name="name">Manager GRs</field>
-            <field ref="model_genreg_register" name="model_id"/>
+            <field name="model_id" ref="model_genreg_register" />
             <field name="domain_force">[(1,'=',1)]</field>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="True"/>
-            <field name="perm_unlink" eval="True"/>
-            <field name="groups" eval="[(4, ref('group_genreg_user_manager'))]"/>
+            <field name="groups" eval="[(4, ref('genreg.group_genreg_user_manager'))]"/>
         </record>
 
         <record id="genreg_record_user_rule" model="ir.rule">

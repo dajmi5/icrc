@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template id="template" xml:space="preserve">
+    <t t-name="genreg.ListView.Buttons" t-inherit="web.ListView.Buttons" t-inherit-mode="extension" owl="1">
+
+            <xpath expr="//*[@class='btn btn-primary o_list_button_add']" position="after">
+                x<t t-out="showSearchBar"/>a
+                <t t-esc="active_id or 'No active_id found'"/>
+                <t t-if="show_project_update">
+                <span>GR name</span>
+                </t>
+            </xpath>
+    </t>
+</template>

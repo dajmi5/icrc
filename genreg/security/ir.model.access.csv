@@ -7,5 +7,5 @@ access_genreg_confidentiality_user,General Register Confidentiality Default,mode
 access_genreg_record_manager,General Register Record Manager,model_genreg_record,group_genreg_user_manager,1,1,1,1
 access_genreg_register_manager,General Register Register Manager,model_genreg_register,group_genreg_user_manager,1,1,1,1
 access_genreg_record_format_manager,General Register Format Manager,model_genreg_record_format,group_genreg_user_manager,1,1,1,1
-access_genreg_record_format_manager,General Register DocType Manager,model_genreg_record_doctype,group_genreg_user_manager,1,1,1,1
+access_genreg_record_doctype_manager,General Register DocType Manager,model_genreg_record_doctype,group_genreg_user_manager,1,1,1,1
 access_genreg_confidentiality_manager,General Register Confidentiality Manager,model_genreg_confidentiality,group_genreg_user_manager,1,1,1,1
