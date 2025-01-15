@@ -1,1 +1,0 @@
-This module allows to set a helpdesk dashboard in project dashboard group.

@@ -1,8 +1,0 @@
-<odoo>
-
-    <record id="action_genreg_record_doctype" model="ir.actions.act_window">
-        <field name="name">Document types</field>
-        <field name="res_model">genreg.record.doctype</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-</odoo>

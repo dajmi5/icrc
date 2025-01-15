@@ -1,1 +1,0 @@
-* Germán López <german@domatix.com>

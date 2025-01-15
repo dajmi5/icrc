@@ -1,5 +1,0 @@
-id,name,code,default
-confidentiality_strictly_confidential,Strictly Confidential,SC,
-confidentiality_confidential,Confidential,C,
-confidentiality_internal,Internal,I,true
-confidentiality_public,Public,P,
