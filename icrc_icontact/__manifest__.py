@@ -8,7 +8,9 @@
     'depends': [
         'contacts',
         'partner_firstname',
-        'partner_contact_gender'
+        'partner_contact_gender',
+        'icrc_military_rank',
+        'web_hierarchy'
     ],
     'data': [
         'security/security_groups.xml',

@@ -27,8 +27,14 @@
                                    name="name" default_focus="1"
                                    placeholder="e.g. Lumber Inc"
                                    attrs="{'required' : [('type', '=', 'contact')],
+                                           'readonly': [('is_company', '=', False)],
                                            'invisible': [('is_company','=', False)]}"/>
-                            <field id="individual" class="text-break" name="name" default_focus="1" placeholder="e.g. Brandom Freeman" attrs="{'required' : [('type', '=', 'contact')], 'invisible': [('is_company','=', True)]}"/>
+                            <field id="individual" class="text-break"
+                                   name="name" default_focus="1"
+                                   placeholder="e.g. Brandom Freeman"
+                                   attrs="{'required' : [('type', '=', 'contact')],
+                                           'readonly': [('is_company', '=', False)],
+                                           'invisible': [('is_company','=', True)]}"/>
                         </h1>
                         <div class="o_row">
                             <field name="parent_id" widget="res_partner_many2one" placeholder="Stakeholder Name..." domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True, 'default_user_id': user_id}" attrs="{'invisible': ['|', '&amp;', ('is_company','=', True),('parent_id', '=', False),('company_name', '!=', False),('company_name', '!=', '')]}"/>
@@ -38,42 +44,51 @@
                     </div>
 
                     <group string="Contact Information" attrs="{'invisible': [('is_company', '=', True)]}">
-
-
-                                <field name="lastname" attrs="{'required': [('firstname', '=', False),                                 ('is_company', '=', False),                                 ('type', '=', 'contact')]}"/>
-                                <field name="firstname" attrs="{'required': [('lastname', '=', False),                                 ('is_company', '=', False),                                 ('type', '=', 'contact')]}"/>
-
-                      <field name="gender"/>
+                        <field name="lastname" attrs="{'required': [('firstname', '=', False),('is_company', '=', False),('type', '=', 'contact')]}"/>
+                        <field name="firstname" attrs="{'required': [('lastname', '=', False),('is_company', '=', False),('type', '=', 'contact')]}"/>
                     </group>
-                    <group string="Additional Information">
+                    <group string="General Information">
                       <group>
-                            <field name="report_to"/>
-                            <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('is_company','=', True)]}"/>
-                            <field name="phone" widget="phone"/>
-                            <field name="mobile" widget="phone" groups="icrc_icontact.group_icontact_contributor"/>
+                            <field name="contact_type"/>
+                            <field name="report_to" attrs="{'invisible': [('contact_type','=', 'civil'),('is_company', '=', True)]}"/>
+                            <field name="phone" widget="phone"/> <!-- Landline -->
+                            <field name="mobile" widget="phone" groups="icrc_icontact.group_icontact_contributor"/> <!-- Mobile - Restricted -->
                             <field name="user_ids" invisible="1"/>
-                            <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'required': [('user_ids','!=', [])]}"/>
-                            <field name="email_private" widget="email" groups="icrc_icontact.group_icontact_contributor"/>
-                            <field name="website" string="Website" widget="url" placeholder="e.g. https://www.odoo.com"/>
-                            <field name="title" options="{&quot;no_open&quot;: True}" placeholder="e.g. Mister" attrs="{'invisible': [('is_company', '=', True)]}"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}" attrs="{'required': [('user_ids','!=', [])]}"/> <!-- Email general -->
+                            <field name="email_private" widget="email" groups="icrc_icontact.group_icontact_contributor"/> <!-- Private email - Restricted -->
                             <field name="active_lang_count" invisible="1"/>
                             <field name="lang" attrs="{'invisible': [('active_lang_count', '&lt;=', 1)]}"/>
                             <field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="e.g. &quot;B2B&quot;, &quot;VIP&quot;, &quot;Consulting&quot;, ..."/>
                         </group>
                         <group>
-                          <field name="level_of_interest" widget="Badges" options="{'bar_colors': {'positive': 'green', 'medium': 'orange', 'negative': 'red'}}"/>
-                          <field name="power_influence"/>
-                          <field name="attitude_icrc"/>
-                          <field name="icrc_focal_point"/>
-                          <field name="land_line"/>
-                          <field name="bio_url" widget="url"/>
-                          <field name="social_media_1" widget="url"/>
-                          <field name="social_media_2" widget="url"/>
-                          <field name="social_media_3" widget="url"/>
+                            <field name="bio_url" widget="url"/>
+                            <field name="website" string="Website" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                            <field name="social_media_1" widget="url"/>
+                            <field name="social_media_2" widget="url"/>
+                            <field name="social_media_3" widget="url"/>
+                            <field name="icrc_focal_point"/>
                         </group>
+                    </group>
+                    <group>
+
                     </group>
 
                     <notebook colspan="4">
+                        <page string="Additional information" attrs="{'invisible': [('is_company', '=', True)]}">
+                            <group>
+                                <group>
+                                    <field name="gender"/>
+                                    <field name="title" options="{&quot;no_open&quot;: True}" placeholder="e.g. Mister" attrs="{'invisible': [('is_company', '=', True)]}"/>
+                                    <field name="function" placeholder="e.g. Sales Director" attrs="{'invisible': [('is_company','=', True)]}"/>
+                                </group>
+                                <group>
+                                    <field name="military_rank" attrs="{'invisible': [('contact_type','!=', 'armed')]}"/>
+                                    <field name="level_of_interest" widget="Badges" options="{'bar_colors': {'positive': 'green', 'medium': 'orange', 'negative': 'red'}}"/>
+                                    <field name="power_influence"/>
+                                    <field name="attitude_icrc"/>
+                                </group>
+                            </group>
+                        </page>
                         <page string="Contacts &amp; Addresses" name="contact_addresses" autofocus="autofocus">
                             <field name="child_ids" mode="kanban" context="{'default_parent_id': active_id,  'default_user_id': user_id, 'default_type': 'other'}"><!--'default_lang': lang,  'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id,-->
                                 <kanban>
@@ -225,7 +240,7 @@
                 <field name="contact_type"/>
                 <field name="report_to"/>
                 <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
-                <field name="land_line"/>
+                <field name="phone"/>
                 <field name="social_media_1" widget="url" optional="hide"/>
                 <field name="social_media_2" widget="url" optional="hide"/>
                 <field name="social_media_3" widget="url" optional="hide"/>
@@ -236,6 +251,7 @@
     <record id="view_stakeholder_list" model="ir.ui.view">
         <field name="name">res.partner.list.stakeholder</field>
         <field name="model">res.partner</field>
+        <field name="field_parent">child_ids</field>
         <field name="arch" type="xml">
             <tree string="Custom Contact List">
                 <field name="name"/>
@@ -246,13 +262,35 @@
                 <field name="power_influence" optional="show"/>
                 <field name="attitude_icrc" optional="show"/>
                 <field name="icrc_focal_point" optional="show"/>
-                <field name="land_line"/>
+                <field name="phone"/>
                 <field name="website" widget="url"/>
                 <field name="social_media_1" widget="url" optional="hide"/>
                 <field name="social_media_2" widget="url" optional="hide"/>
                 <field name="social_media_3" widget="url" optional="hide"/>
-
             </tree>
+        </field>
+    </record>
+
+    <!-- ONLY IN Odoo 17 with the module web_hierarchy  / draggable="1" -->
+    <record id="view_stakeholder_hierarchy" model="ir.ui.view">
+        <field name="name">res.partner.view.hierarchy</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <hierarchy child_field="child_ids">
+                <field name="name"/>
+                <templates>
+                    <t t-name="hierarchy-box">
+                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4"
+                             t-att-title="parent_id">
+                        </div>
+                        <div class="o_hierarchy_node_body d-flex flex-column text-center">
+                            <div class="w-100 position-relative">
+                                <field class="fw-bold" name="name"/><br/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </hierarchy>
         </field>
     </record>
 
@@ -279,9 +317,13 @@
 
     <!-- Stakeholder action definition -->
     <record id="action_stakeholder" model="ir.actions.act_window">
-        <field name="name">Steak holder Action</field>
+        <field name="name">Stakeholder Action</field>
         <field name="res_model">res.partner</field>
+<<<<<<< Updated upstream
         <field name="view_mode">kanban,tree,form,activity</field>
+=======
+        <field name="view_mode">kanban,tree,form,activity,hierarchy</field>
+>>>>>>> Stashed changes
         <field name="domain">[('is_company', '=', True)]</field>
     </record>
 
@@ -292,6 +334,23 @@
         <field name="act_window_id" ref="action_stakeholder"/>
     </record>
 
+<<<<<<< Updated upstream
+=======
+    <record id="action_stakeholder_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_icontact_form"/>
+        <field name="act_window_id" ref="action_stakeholder"/>
+    </record>
+
+    <record id="action_stakeholder_view_hierarchy" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">hierarchy</field>
+        <field name="view_id" ref="view_stakeholder_hierarchy"/>
+        <field name="act_window_id" ref="action_stakeholder"/>
+    </record>
+
+>>>>>>> Stashed changes
     <menuitem id="menu_icontact_stakeholder_form"
               name="Stakeholder"
               parent="contacts.menu_contacts"

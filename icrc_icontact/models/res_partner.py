@@ -33,10 +33,17 @@ class ResPartner(models.Model):
         selection=[
             ('armed', 'Armed and Security Forces'),
             ('civil', 'Civil society'),
-            ('ngo', 'Diplomatic corps/Donors'),
+            ('diplomatic', 'Diplomatic corps/Donors'),
             ('ngo', 'IO/NGO'),
         ],
-        string='Type'
+        string='Stakeholder Type'
+    )
+
+    company_type = fields.Selection(
+        selection=[
+            ('person', 'Individual'),
+            ('company', 'Stakeholder'),
+        ],
     )
 
     power_influence = fields.Selection(
@@ -59,3 +66,6 @@ class ResPartner(models.Model):
     social_media_3 = fields.Char(string='Social Media 3', help="Link to the third social media profile")
     email_private = fields.Char(string='Email private',)
     report_to = fields.Many2one("res.partner", "Report to")
+
+    #Military rank maybe to move to an other module
+    military_rank = fields.Many2one("military.rank","Rank")
