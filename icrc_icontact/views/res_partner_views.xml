@@ -319,11 +319,7 @@
     <record id="action_stakeholder" model="ir.actions.act_window">
         <field name="name">Stakeholder Action</field>
         <field name="res_model">res.partner</field>
-<<<<<<< Updated upstream
-        <field name="view_mode">kanban,tree,form,activity</field>
-=======
         <field name="view_mode">kanban,tree,form,activity,hierarchy</field>
->>>>>>> Stashed changes
         <field name="domain">[('is_company', '=', True)]</field>
     </record>
 
@@ -334,8 +330,6 @@
         <field name="act_window_id" ref="action_stakeholder"/>
     </record>
 
-<<<<<<< Updated upstream
-=======
     <record id="action_stakeholder_view_form" model="ir.actions.act_window.view">
         <field name="sequence" eval="1"/>
         <field name="view_mode">form</field>
@@ -350,7 +344,6 @@
         <field name="act_window_id" ref="action_stakeholder"/>
     </record>
 
->>>>>>> Stashed changes
     <menuitem id="menu_icontact_stakeholder_form"
               name="Stakeholder"
               parent="contacts.menu_contacts"
