@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_military_rank_user,access_military_rank,model_military_rank,icrc_military_rank.group_military_user,1,0,0,0
+access_military_rank_manager,access_military_rank,model_military_rank,icrc_military_rank.group_military_manager,1,1,1,1
