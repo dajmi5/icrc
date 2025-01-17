@@ -6,7 +6,7 @@
     "name": "Operating Unit hierarchy",
     "summary": "Adding parent/child in Operating Unit"
     "company",
-    "version": "16.0.1.0.2",
+    "version": "18.0.1.0.2",
     "author": "ICRC, Julien MASS ",
     "category": "Generic",
     "depends": [

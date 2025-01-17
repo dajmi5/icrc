@@ -5,7 +5,7 @@
 {
     "name": "Operating Unit in Contact",
     "summary": "Adds the concept of operating unit (OU) in Contact",
-    "version": "16.0.1.0.1",
+    "version": "18.0.1.0.1",
     "author": "ICRC",
     "category": "Product",
     "depends": ["base", "operating_unit", "operating_unit_hierarchy"],

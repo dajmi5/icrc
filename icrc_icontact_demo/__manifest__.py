@@ -3,7 +3,7 @@
 
 {
     'name': 'IContact Demo',
-    'version': '16.0.1.0.0',
+    'version': '18.0.1.0.0',
     'summary': 'Install base IContact module',
     'category': 'Contacts',
     'author': 'ICRC, julien MASS',
@@ -15,7 +15,7 @@
         'data/base_setup.xml',         # load lang, currency
         'data/res_company.xml',        # enter company data
     ],
-    'installable': True,
+    # 'installable': True,
     'application': False,
     'license': 'LGPL-3',
 }

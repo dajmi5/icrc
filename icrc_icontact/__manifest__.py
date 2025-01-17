@@ -1,6 +1,6 @@
 {
     'name': 'ICRC IContact Fields',
-    'version': '16.0.1.0.0',
+    'version': '18.0.1.0.0',
     'summary': 'Adds custom fields to the Contact form in Odoo 16',
     'description': 'POC : Adding new field to contact',
     'category': 'Contacts',
@@ -16,7 +16,7 @@
         'security/security_groups.xml',
         'views/res_partner_views.xml',
     ],
-    'installable': True,
+    #'installable': True,
     'application': False,
     'license': 'LGPL-3',
 }
