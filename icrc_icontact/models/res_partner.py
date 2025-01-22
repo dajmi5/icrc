@@ -70,3 +70,14 @@ class ResPartner(models.Model):
 
     #Military rank maybe to move to an other module
     military_rank = fields.Many2one("military.rank","Rank")
+
+    def open_hierarchy_view(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Hierarchy',
+            'view_mode': 'hierarchy',
+            'res_model': 'your.related.model',
+            'domain': [("id","=",self.id)],
+            'context': dict(self.env.context),
+            'target': 'current',
+        }

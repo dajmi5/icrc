@@ -7,7 +7,13 @@
         <field name="arch" type="xml">
             <form string="IContact Form">
                 <sheet>
-                    <div class="oe_button_box" name="button_box"/>
+                    <div class="oe_button_box" name="button_box">
+                      <button name="open_hierarchy_view" icon="fa-users" type="object" invisible="(not parent_id and not child_ids) or parent_id == id">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Org Chart</span>
+                            </div>
+                        </button>
+                    </div>
                     <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
                     <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     <div class="oe_title mb24">
@@ -184,6 +190,23 @@
                 <field name="social_media_2" widget="url" optional="hide"/>
                 <field name="social_media_3" widget="url" optional="hide"/>
             </list>
+        </field>
+    </record>
+
+    <record id="action_open_hierarchy_view" model="ir.actions.act_window">
+        <field name="name">Org Chart</field>
+        <field name="res_model">res.partner</field>
+        <field name="path">org-chart</field>
+        <field name="view_mode">hierarchy,list</field>
+        <field name="domain">[]</field>
+        <field name="context">{'chat_icon': True}</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new contact
+            </p><p>
+                Quickly find all the information you need for your Partner such as contact data, job position, etc.
+            </p>
         </field>
     </record>
 
