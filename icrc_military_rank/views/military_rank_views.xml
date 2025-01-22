@@ -20,16 +20,16 @@
         </record>
 
 
-        <record id="view_rank_tree" model="ir.ui.view">
-            <field name="name">military.rank.tree</field>
+        <record id="view_rank_list" model="ir.ui.view">
+            <field name="name">military.rank.list</field>
             <field name="model">military.rank</field>
             <field name="arch" type="xml">
-                <tree string="Military Ranks">
+                <list string="Military Ranks">
                     <field name="sequence" widget="handle"/>
                     <field name="name"/>
                     <field name="code"/>
                     <field name="parent_id"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -50,7 +50,7 @@
         <record id="military_rank_action" model="ir.actions.act_window">
             <field name="name">Military Ranks</field>
             <field name="res_model">military.rank</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
 
