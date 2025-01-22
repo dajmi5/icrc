@@ -7,16 +7,17 @@ class ResPartner(models.Model):
     @api.model
     def _get_rating_sel(self):
         return [
-            (1, "1"),
-            (2, "2"),
-            (3, "3"),
-            (4, "4"),
-            (5, "5"),
-            (6, "6"),
-            (7, "7"),
-            (8, "8"),
-            (9, "9"),
-            (10, "10"),
+            ("0", "0"),
+            ("1", "1"),
+            ("2", "2"),
+            ("3", "3"),
+            ("4", "4"),
+            ("5", "5"),
+            ("6", "6"),
+            ("7", "7"),
+            ("8", "8"),
+            ("9", "9"),
+            ("10", "10"),
         ]
     level_of_interest = fields.Selection(
         selection=[
@@ -69,3 +70,14 @@ class ResPartner(models.Model):
 
     #Military rank maybe to move to an other module
     military_rank = fields.Many2one("military.rank","Rank")
+
+    def open_hierarchy_view(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Hierarchy',
+            'view_mode': 'hierarchy',
+            'res_model': 'your.related.model',
+            'domain': [("id","=",self.id)],
+            'context': dict(self.env.context),
+            'target': 'current',
+        }
