@@ -1,7 +1,7 @@
 <odoo>
 
-    <record id="res_partner_tree_view" model="ir.ui.view">
-        <field name="name">res.partner_tree</field>
+    <record id="res_partner_tree_list" model="ir.ui.view">
+        <field name="name">res.partner_list</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_tree" />
         <field name="arch" type="xml">

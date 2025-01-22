@@ -18,7 +18,7 @@
     <field name="inherit_id" ref="operating_unit.view_operating_unit_tree"/>
     <field name="arch" type="xml">
         <!-- Add the parent_id field to the tree view -->
-        <xpath expr="//tree" position="inside">
+        <xpath expr="//list" position="inside">
             <field name="parent_id" />
         </xpath>
     </field>
