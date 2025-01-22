@@ -17,7 +17,7 @@
                             <field id="individual" options="{'line_breaks': False}" widget="text" class="text-break" name="name" default_focus="1" placeholder="e.g. Brandon Freeman" invisible="is_company" required="type == 'contact'"/>
                         </h1>
                         <div class="o_row">
-                            <field name="parent_id" widget="res_partner_many2one" placeholder="Company Name..." domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True, 'default_user_id': user_id}" invisible="((is_company and not parent_id) or company_name) and company_name != ''"/>
+                            <field name="parent_id" widget="res_partner_many2one" placeholder="Stakeholder Name..." domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True, 'default_user_id': user_id}" invisible="((is_company and not parent_id) or company_name) and company_name != ''"/>
                                 <field name="company_name" invisible="not company_name or company_name == '' or is_company"/>
                                 <button name="create_company" icon="fa-plus-square" string="Create company" type="object" class="oe_edit_only btn-link" invisible="is_company or company_name == '' or not company_name"/>
                         </div>
@@ -26,43 +26,46 @@
                     <group string="General Information">
                         <group>
                             <span class="o_form_label o_td_label o_address_type" name="address_name">
-                                <field name="type" invisible="is_company" readonly="user_ids" required="not is_company" class="fw-bold"/>
+                                <field name="type" invisible="1" readonly="user_ids" required="not is_company" class="fw-bold"/>
                             </span>
                             <field name="contact_type"/>
                             <field name="firstname" required="not lastname and not is_company and type == 'contact'" invisible="is_company"/>
                             <field name="lastname" required="not firstname and not is_company and type == 'contact'" invisible="is_company"/>
-                            <field name="email" widget="email" context="{'gravatar_image': True}" required="user_ids"/>
-                            <field name="email_private" widget="email" groups="icrc_icontact.group_icontact_contributor"/>
+                            <field name="gender" invisible="is_company"/>
+                            <field name="title" options="{&quot;no_open&quot;: True}" placeholder="e.g. Mister" invisible="is_company"/>
+                            <field name="function" placeholder="e.g. Sales Director" invisible="is_company"/>
+                            <field name="military_rank" invisible="contact_type != 'armed'"/>
+                            <field name="color" widget="color_picker" string="Color" groups="base.group_no_one"/>
                             <field name="lang" invisible="active_lang_count &lt;= 1"/>
                             <field name="category_id" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="e.g. &quot;B2B&quot;, &quot;VIP&quot;, &quot;Consulting&quot;, ..."/>
                         </group>
                         <group>
-                             <field name="bio_url" widget="url"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}" required="user_ids"/>
+                            <field name="email_private" widget="email" groups="icrc_icontact.group_icontact_contributor"/>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone" groups="icrc_icontact.group_icontact_contributor"/>
+                            <field name="bio_url" widget="url"/>
                             <field name="website" string="Website" widget="url" placeholder="e.g. https://www.odoo.com"/>
                             <field name="social_media_1" widget="url"/>
                             <field name="social_media_2" widget="url"/>
                             <field name="social_media_3" widget="url"/>
-                            <field name="icrc_focal_point"/>
                         </group>
                     </group>
 
                     <notebook colspan="4">
-                        <page invisible="is_company">
+                        <page string="Additionnal information">
                             <group>
                                 <group>
-                                    <field name="gender"/>
-                                    <field name="title" options="{&quot;no_open&quot;: True}" placeholder="e.g. Mister" invisible="is_company"/>
-                                    <field name="function" placeholder="e.g. Sales Director" invisible="is_company"/>
+                                    <field name="icrc_focal_point"/>
+                                    <field name="level_of_interest"/>
                                 </group>
                                 <group>
-                                    <field name="military_rank" invisible="contact_type is not 'armed'"/>
-                                    <field name="level_of_interest" widget="Badges" options="{'bar_colors': {'positive': 'green', 'medium': 'orange', 'negative': 'red'}}"/>
-                                    <field name="power_influence"/>
-                                    <field name="attitude_icrc"/>
+                                    <field name="power_influence" widget="priority"/>
+                                    <field name="attitude_icrc" widget="priority"/>
                                 </group>
                             </group>
                         </page>
-                        <page string="Contacts &amp; Addresses" name="contact_addresses" autofocus="autofocus">
+                        <page string="Contacts &amp; Addresses" name="contact_addresses" >
                             <field name="child_ids" mode="kanban" context="{'default_parent_id': id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'other'}">
                                 <kanban color="color">
                                     <field name="color"/>
@@ -141,7 +144,7 @@
                                 </form>
                             </field>
                         </page>
-                        <page name="sales_purchases" string="Sales &amp; Purchase">
+                        <page name="sales_purchases" string="Sales &amp; Purchase" groups="base.group_no_one">
                             <group name="container_row_2">
                                 <group string="Sales" name="sale" priority="1">
                                     <field name="user_id" widget="many2one_avatar_user" domain="[('share', '=', False)]"/>
@@ -206,22 +209,23 @@
         </field>
     </record>
 
-    <!-- ONLY IN Odoo 17 with the module web_hierarchy  / draggable="1" -->
     <record id="view_stakeholder_hierarchy" model="ir.ui.view">
         <field name="name">res.partner.view.hierarchy</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <hierarchy child_field="child_ids">
                 <field name="name"/>
+                <field name="color"/>
                 <templates>
                     <t t-name="hierarchy-box">
-                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4"
-                             t-att-title="parent_id">
+                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4 o_hierarchy_node_color_{{ record.color.raw_value }}" t-att-title="parent_id">
+                            <field name="image_1024" preview_image="image_128" options="{'zoom': true, 'zoom_delay': 1000}" widget="background_image"/>
                         </div>
                         <div class="o_hierarchy_node_body d-flex flex-column text-center">
-                            <div class="w-100 position-relative">
-                                <field class="fw-bold" name="name"/><br/>
+                            <div class="d-flex">
+                                <field class="fw-bold w-100" name="name"/>
                             </div>
+                            <field name="function"/>
                         </div>
                     </t>
                 </templates>
