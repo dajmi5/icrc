@@ -187,7 +187,6 @@
     <record id="view_stakeholder_list" model="ir.ui.view">
         <field name="name">res.partner.list.stakeholder</field>
         <field name="model">res.partner</field>
-        <field name="field_parent">child_ids</field>
         <field name="arch" type="xml">
             <list string="Custom Contact List">
                 <field name="name"/>
