@@ -182,6 +182,7 @@
             <list string="Custom Contact List">
                 <field name="parent_id"/>
                 <field name="name"/>
+                <field name="function"/>
                 <field name="contact_type"/>
                 <field name="report_to"/>
                 <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
@@ -196,7 +197,6 @@
     <record id="action_open_hierarchy_view" model="ir.actions.act_window">
         <field name="name">Org Chart</field>
         <field name="res_model">res.partner</field>
-        <field name="path">org-chart</field>
         <field name="view_mode">hierarchy,list</field>
         <field name="domain">[]</field>
         <field name="context">{'chat_icon': True}</field>
@@ -310,14 +310,14 @@
               name="Stakeholder"
               parent="contacts.menu_contacts"
               action="icrc_icontact.action_stakeholder"
-              sequence="10"/>
+              sequence="1"/>
 
     <!-- New Menu Item for Custom Contact Form -->
     <menuitem id="menu_icontact_contact_form"
               name="IContacts"
               parent="contacts.menu_contacts"
               action="action_icontact"
-              sequence="11"/>
+              sequence="1"/>
 
 
 
