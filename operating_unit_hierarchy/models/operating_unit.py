@@ -10,3 +10,5 @@ class OperatingUnit(models.Model):
     _inherit = "operating.unit"
 
     parent_id = fields.Many2one("operating.unit", "Parent")
+    child_ids =fields.One2many("operating.unit","parent_id","Childs")
+    color = fields.Integer(string='Color',default=6)

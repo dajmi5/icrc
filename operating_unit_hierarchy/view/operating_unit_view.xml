@@ -24,4 +24,33 @@
     </field>
 </record>
 
+    <record id="view_operating_unit_hierarchy" model="ir.ui.view">
+        <field name="name">operating.unit.view.hierarchy</field>
+        <field name="model">operating.unit</field>
+        <field name="arch" type="xml">
+            <hierarchy child_field="child_ids">
+                <field name="name"/>
+                <templates>
+                    <t t-name="hierarchy-box">
+                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4 o_hierarchy_node_color_{{ record.color.raw_value }}" t-att-title="parent_id">
+
+                        </div>
+                        <div class="o_hierarchy_node_body d-flex flex-column text-center">
+                            <div class="d-flex">
+                                <field class="fw-bold w-100" name="name"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </hierarchy>
+        </field>
+    </record>
+
+    <record id="action_stakeholder_view_hierarchy" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">hierarchy</field>
+        <field name="view_id" ref="view_operating_unit_hierarchy"/>
+        <field name="act_window_id" ref="operating_unit.action_operating_unit_tree"/>
+    </record>
+
 </odoo>
