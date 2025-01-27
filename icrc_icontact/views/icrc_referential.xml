@@ -105,9 +105,9 @@
                     <sheet>
                         <group>
                             <field name="name"/>
-                            <field name="local_name"/>
+<!--                            <field name="local_name"/>-->
                             <field name="adminlevel2_id"/>
-                            <field name="adminlevel3_id"/>
+<!--                            <field name="adminlevel3_id"/>-->
                             <field name="latitude"/>
                             <field name="longitude"/>
                             <field name="code"/>
@@ -125,9 +125,9 @@
                 <list string="Localities">
                     <field name="code"/>
                     <field name="name"/>
-                    <field name="local_name"/>
+<!--                    <field name="local_name"/>-->
                     <field name="adminlevel2_id"/>
-                    <field name="adminlevel3_id"/>
+<!--                    <field name="adminlevel3_id"/>-->
                     <field name="latitude"/>
                     <field name="longitude"/>
                 </list>
