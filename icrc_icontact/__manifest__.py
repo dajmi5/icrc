@@ -15,6 +15,7 @@
     'data': [
         'security/security_groups.xml',
         'views/res_partner_views.xml',
+        'views/res_icrc_referential.xml',
     ],
     #'installable': True,
     'application': False,
