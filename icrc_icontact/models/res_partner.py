@@ -71,7 +71,7 @@ class ResPartner(models.Model):
         selection=[
             ('none', 'No protection discussion started'),
             ('basic', 'Basic PROT dissemination conducted'),
-            ('depth' 'In depth PROT discussion conducted'),
+            ('depth', 'In depth PROT discussion conducted'),
             ('signed', 'PROT representation conducted (written or oral)')
         ],
         string="Level of Prot Dialogue"
