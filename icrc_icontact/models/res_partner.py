@@ -67,6 +67,16 @@ class ResPartner(models.Model):
     social_media_3 = fields.Char(string='Social Media 3', help="Link to the third social media profile")
     email_private = fields.Char(string='Email private',)
     report_to = fields.Many2one("res.partner", "Report to")
+    level_prot_dialog = fields.Selection(
+        selection=[
+            ('none', 'No protection discussion started'),
+            ('basic', 'Basic PROT dissemination conducted'),
+            ('depth' 'In depth PROT discussion conducted'),
+            ('signed', 'PROT representation conducted (written or oral)')
+        ],
+        string="Level of Prot Dialogue"
+    )
+    recorded_prot6 = fields.Char("Recorded in Prot6", help="Link to the Prot6")
 
     #Military rank maybe to move to an other module
     military_rank = fields.Many2one("military.rank","Rank")
@@ -76,7 +86,7 @@ class ResPartner(models.Model):
             'type': 'ir.actions.act_window',
             'name': 'Hierarchy',
             'view_mode': 'hierarchy',
-            'res_model': 'your.related.model',
+            'res_model': 'res.partner',
             'domain': [("id","=",self.id)],
             'context': dict(self.env.context),
             'target': 'current',

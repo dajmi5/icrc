@@ -55,6 +55,8 @@
                             <field name="social_media_1" widget="url"/>
                             <field name="social_media_2" widget="url"/>
                             <field name="social_media_3" widget="url"/>
+                            <field name="level_prot_dialog" invisible="contact_type != 'armed'"/>
+                            <field name="recorded_prot6" invisible="contact_type != 'armed'"/>
                         </group>
                     </group>
 
@@ -181,9 +183,9 @@
         <field name="arch" type="xml">
             <list string="Custom Contact List">
                 <field name="parent_id"/>
+                <field name="contact_type"/>
                 <field name="name"/>
                 <field name="function"/>
-                <field name="contact_type"/>
                 <field name="report_to"/>
                 <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
                 <field name="phone"/>
@@ -219,10 +221,10 @@
                 <field name="contact_type"/>
                 <field name="phone"/>
                 <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
-                <field name="level_of_interest" optional="show"/>
-                <field name="power_influence" optional="show"/>
-                <field name="attitude_icrc" optional="show"/>
-                <field name="icrc_focal_point" optional="show"/>
+                <field name="level_of_interest" optional="hide"/>
+                <field name="power_influence" optional="hide"/>
+                <field name="attitude_icrc" optional="hide"/>
+                <field name="icrc_focal_point" optional="hide"/>
                 <field name="phone"/>
                 <field name="website" widget="url"/>
                 <field name="social_media_1" widget="url" optional="hide"/>
