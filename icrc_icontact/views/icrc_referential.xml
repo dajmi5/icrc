@@ -97,17 +97,17 @@
         </record>
 
     <!-- Locality -->
-    <record id="view_icrc_adminlevel03_form" model="ir.ui.view">
-            <field name="name">icrc.adminlevel03.form</field>
-            <field name="model">icrc.adminlevel03</field>
+    <record id="view_icrc_locality_form" model="ir.ui.view">
+            <field name="name">icrc.locality.form</field>
+            <field name="model">icrc.locality</field>
             <field name="arch" type="xml">
                 <form string="Locality">
                     <sheet>
                         <group>
                             <field name="name"/>
-<!--                            <field name="local_name"/>-->
+                            <field name="local_name"/>
                             <field name="adminlevel2_id"/>
-<!--                            <field name="adminlevel3_id"/>-->
+                            <field name="adminlevel3_id"/>
                             <field name="latitude"/>
                             <field name="longitude"/>
                             <field name="code"/>
@@ -125,9 +125,9 @@
                 <list string="Localities">
                     <field name="code"/>
                     <field name="name"/>
-<!--                    <field name="local_name"/>-->
+                    <field name="local_name"/>
                     <field name="adminlevel2_id"/>
-<!--                    <field name="adminlevel3_id"/>-->
+                    <field name="adminlevel3_id"/>
                     <field name="latitude"/>
                     <field name="longitude"/>
                 </list>
