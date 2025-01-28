@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_admin_level01_user,access_admin_level01_user,model_icrc_adminlevel01,,1,0,0,0
+access_admin_level01_manager,access_admin_level01_manager,model_icrc_adminlevel01,base.group_erp_manager,1,1,1,1
+access_admin_level02_user,access_admin_level02_user,model_icrc_adminlevel02,,1,0,0,0
+access_admin_level02_manager,access_admin_level02_manager,model_icrc_adminlevel02,base.group_erp_manager,1,1,1,1
+access_admin_level03_user,access_admin_level03_user,model_icrc_adminlevel03,,1,0,0,0
+access_admin_level03_manager,access_admin_level03_manager,model_icrc_adminlevel03,base.group_erp_manager,1,1,1,1
+access_icrc_locality_user,access_admin_level01_user,model_icrc_locality,,1,0,0,0
+access_icrc_locality_manager,access_admin_level01_manager,model_icrc_locality,base.group_erp_manager,1,1,1,1

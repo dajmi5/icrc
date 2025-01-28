@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Will need to add static data here
+    -->
+    <!-- Partner relation types -->
+    <record id="rel_type_relative" model="res.partner.relation.type">
+        <field name="name">Is relative of</field>
+        <field name="name_inverse">Is relative of</field>
+        <field name="contact_type_left">p</field>
+        <field name="contact_type_right">p</field>
+        <field name="is_symmetric" eval="True" />
+    </record>
+
+</odoo>
