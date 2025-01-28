@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">icontact_relation.view_partner_form</field>
+        <field name="inherit_id" ref="icrc_icontact.view_icontact_form" />
+        <field name="model">res.partner</field>
+        <field type="xml" name="arch">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_relations"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-users"
+                >
+                    <field name="relation_count" widget="statinfo" string="Relations" />
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

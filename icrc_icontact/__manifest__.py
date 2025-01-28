@@ -14,6 +14,7 @@
     ],
     'data': [
         'security/security_groups.xml',
+        'security/ir.model.access.csv',
         'views/res_partner_views.xml',
         'views/icrc_referential.xml',
     ],
