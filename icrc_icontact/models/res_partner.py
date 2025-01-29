@@ -19,6 +19,24 @@ class ResPartner(models.Model):
             ("9", "9"),
             ("10", "10"),
         ]
+
+    # override original string in selection?
+    company_type = fields.Selection(
+        selection=[
+            ('person', 'Individual'),
+            ('company', 'Stakeholder'),
+        ],
+    )
+    power_influence = fields.Selection(
+        selection=_get_rating_sel,
+        string='Power & Influence',
+        help='Level of power and influence (1-10)'
+    )
+    attitude_icrc = fields.Selection(
+        selection=_get_rating_sel,
+        string='Attitude towards the ICRC',
+        help='Attitude towards the ICRC (1-10)'
+    )
     level_of_interest = fields.Selection(
         selection=[
             ('positive', 'Positive'),
@@ -29,7 +47,6 @@ class ResPartner(models.Model):
         help='Level of interest in the organization',
         default='medium'
     )
-
     contact_type = fields.Selection(
         selection=[
             ('armed', 'Armed and Security Forces'),
@@ -39,34 +56,32 @@ class ResPartner(models.Model):
         ],
         string='Stakeholder Type'
     )
-
-    company_type = fields.Selection(
-        selection=[
-            ('person', 'Individual'),
-            ('company', 'Stakeholder'),
-        ],
+    icrc_focal_point = fields.Char(
+        string='ICRC Focal Point/Department',
+        help="The ICRC focal point or department"
     )
-
-    power_influence = fields.Selection(
-        selection=_get_rating_sel,
-        string='Power & Influence',
-        help='Level of power and influence (1-10)'
+    land_line = fields.Char(
+        string='Land Line',
+        help="Landline contact number")
+    bio_url = fields.Char(
+        string='Bio',
+        help="Link to the person's bio"
     )
-
-    attitude_icrc = fields.Selection(
-        selection=_get_rating_sel,
-        string='Attitude towards the ICRC',
-        help='Attitude towards the ICRC (1-10)'
-    )
-
-    icrc_focal_point = fields.Char(string='ICRC Focal Point/Department', help="The ICRC focal point or department")
-    land_line = fields.Char(string='Land Line', help="Landline contact number")
-    bio_url = fields.Char(string='Bio', help="Link to the person's bio")
     social_media_1 = fields.Char(string='Social Media 1', help="Link to the first social media profile")
     social_media_2 = fields.Char(string='Social Media 2', help="Link to the second social media profile")
     social_media_3 = fields.Char(string='Social Media 3', help="Link to the third social media profile")
     email_private = fields.Char(string='Email private',)
-    report_to = fields.Many2one("res.partner", "Report to")
+
+    report_to_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Report to"
+    )
+    report_to_child_ids = fields.One2many(
+        comodel_name='res.partner',
+        inverse_name='report_to_id',
+        string="Reporting to"
+    )
+
     level_prot_dialog = fields.Selection(
         selection=[
             ('none', 'No protection discussion started'),
@@ -78,14 +93,16 @@ class ResPartner(models.Model):
     )
     recorded_prot6 = fields.Char("Recorded in Prot6", help="Link to the Prot6")
 
-    #Military rank maybe to move to an other module
-    military_rank = fields.Many2one("military.rank","Rank")
-
-    def open_hierarchy_view(self):
+    #Moved to military_rank module
+    # military_rank = fields.Many2one("military.rank","Rank")
+    #
+    def button_reporting_hierarchy_view(self):
+        view = self.env.ref('icrc_icontact.view_reporting_hierarchy')
         return {
             'type': 'ir.actions.act_window',
             'name': 'Hierarchy',
             'view_mode': 'hierarchy',
+            'view_id': view.id,
             'res_model': 'res.partner',
             'domain': [("id","=",self.id)],
             'context': dict(self.env.context),

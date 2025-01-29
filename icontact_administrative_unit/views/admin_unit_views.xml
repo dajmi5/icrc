@@ -1,0 +1,124 @@
+<odoo>
+    <record id="view_administrative_unit_tree" model="ir.ui.view">
+        <field name="name">view_administrative_unit_tree</field>
+        <field name="model">administrative.unit</field>
+        <field name="arch" type="xml">
+            <list string="Administrative units">
+                <field name="level" optional="show"/>
+                <field name="level_code" optional="show"/>
+                <field name="code" optional="hide"/>
+                <field name="name"/>
+                <field name="country_group_id" optional="hide"/>
+                <field name="country_id" optional="show"/>
+                <field name="country_state_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_administrative_units_form" model="ir.ui.view">
+        <field name="name">view_administrative_units_form</field>
+        <field name="model">administrative.unit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="parent_id"/>
+                            <field name="level" invisible="not parent_id"/>
+                            <field name="level_code" invisible="not parent_id"/>
+                        </group>
+                        <group>
+                            <field name="country_group_id"/>
+                            <field name="country_id"/>
+                            <field name="country_state_id"/>
+                            <field name="longitude"/>
+                            <field name="latitude"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Direct subunits">
+                            <field name="child_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="search_administrative_units" model="ir.ui.view">
+        <field name="name">search_administrative_units</field>
+        <field name="model">administrative.unit</field>
+        <field name="arch" type="xml">
+            <search string="Administrative units">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="country_id"/>
+                <separator/>
+                <field name="longitude"/>
+                <field name="latitude"/>
+                <separator/>
+                <filter name="level_0"
+                        string="Top level only"
+                        domain="[('level','=',0)]"/>
+                <group expand="0" string="Group By">
+
+                    <filter name="group_level"
+                            string="By Level"
+                            domain=""
+                            context="{'group_by': 'level'}"/>
+                    <separator/>
+                    <filter name="group_country_group_id"
+                            string="By Country Group"
+                            domain=""
+                            context="{'group_by': 'country_group_id'}"/>
+                    <filter name="group_country_id"
+                            string="By Country"
+                            domain=""
+                            context="{'group_by': 'country_id'}"/>
+                    <filter name="group_country_group_id"
+                            string="By Country State"
+                            domain=""
+                            context="{'group_by': 'country_state_id'}"/>
+
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_administrative_unit_hierarchy" model="ir.ui.view">
+        <field name="name">view_administrative_unit_hierarchy</field>
+        <field name="model">administrative.unit</field>
+        <field name="arch" type="xml">
+            <hierarchy child_field="child_ids">
+                <field name="name"/>
+                <field name="code"/>
+                <templates>
+                    <t t-name="hierarchy-box">
+<!--                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4 o_hierarchy_node_color_{{ record.color.raw_value }}" t-att-title="parent_id">-->
+
+<!--                        </div>-->
+                        <div class="o_hierarchy_node_body d-flex flex-column text-center">
+                            <div class="d-flex">
+
+                                <field class="fw-bold w-100" name="name"/>
+<!--                                <field class="w-100" name="code"/>-->
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </hierarchy>
+        </field>
+    </record>
+    <record id="action_administrative_units" model="ir.actions.act_window">
+        <field name="name">Administrative units</field>
+        <field name="res_model">administrative.unit</field>
+        <field name="view_mode">list,form,hierarchy</field>
+    </record>
+    <menuitem
+        id="menu_administrative_unit"
+        name="Administrative units"
+        action="action_administrative_units"
+        parent="icrc_icontact.menu_icontact_config"
+        sequence="2"
+    />
+</odoo>

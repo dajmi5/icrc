@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+admin_unit_user,AdminUnit-user,model_administrative_unit,base.group_user,1,1,1,1
+access_administrative_unit_user,access_administrative_unit_user,model_administrative_unit,icrc_icontact.group_icontact_contributor,1,0,0,0
+access_administrative_unit_manager,access_administrative_unit_manager,model_administrative_unit,icrc_icontact.group_icontact_manager,1,1,1,1

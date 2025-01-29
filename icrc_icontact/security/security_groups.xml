@@ -1,26 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <!-- Security Group Category (Custom) -->
-    <record id="group_category_icontact" model="ir.module.category">
-        <field name="name">IContact Policy</field>
-        <field name="description">Security category for Owner and Contributor groups related to custom contact fields</field>
-        <field name="sequence">10</field>
+<odoo noupdate="1">
+    <record id="module_category_icrc_icontact" model="ir.module.category">
+        <field name="name">iContact</field>
+        <field name="description">ICRC- iContact
+        Contacts: additional info and relations
+        Administrator: full access including configuration rights.
+        </field>
+        <field name="sequence">1</field>
     </record>
 
-    <!-- Contributor Group -->
+
     <record id="group_icontact_contributor" model="res.groups">
         <field name="name">Contributor</field>
-        <field name="category_id" ref="icrc_icontact.group_category_icontact"/>
+        <field name="category_id" ref="module_category_icrc_icontact"/>
         <field name="comment">Group with limited access to private contact fields</field>
     </record>
 
-    <!-- Owner Group -->
     <record id="group_icontact_owner" model="res.groups">
         <field name="name">Owner</field>
-        <field name="category_id" ref="icrc_icontact.group_category_icontact"/>
+        <field name="category_id" ref="module_category_icrc_icontact"/>
         <field name="comment">Group with full access to private contact fields</field>
-        <field name="implied_ids" eval="[(4, ref('icrc_icontact.group_icontact_contributor'))]"/>
+        <field name="implied_ids" eval="[Command.link(ref('icrc_icontact.group_icontact_contributor'))]"/>
+    </record>
+    <record id="group_icontact_manager" model="res.groups">
+        <field name="name">Contact manager</field>
+        <field name="category_id" ref="module_category_icrc_icontact"/>
+        <field name="comment">Group with management access to all settings and options for contacts</field>
+        <field name="implied_ids" eval="[Command.link(ref('icrc_icontact.group_icontact_owner'))]"/>
+        <field name="users" eval="[Command.link(ref('base.user_root')),
+                                   Command.link(ref('base.user_admin'))]"/>
     </record>
 
 
 </odoo>
+

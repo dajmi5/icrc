@@ -7,8 +7,11 @@
     "summary": "Adds the concept of operating unit (OU) in Contact",
     "version": "18.0.1.0.1",
     "author": "ICRC",
-    "category": "Product",
-    "depends": ["base", "operating_unit", "operating_unit_hierarchy"],
+    "category": "iContact",
+    "depends": [
+        "icrc_icontact",
+        "operating_unit_hierarchy"
+    ],
     "license": "LGPL-3",
     "data": [
         "security/res_partner_security.xml",

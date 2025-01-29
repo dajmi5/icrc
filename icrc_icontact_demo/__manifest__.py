@@ -5,11 +5,11 @@
     'name': 'IContact Demo',
     'version': '18.0.1.0.0',
     'summary': 'Install base IContact module',
-    'category': 'Contacts',
+    'category': 'iContact',
     'author': 'ICRC, julien MASS',
     'depends': [
         'icrc_icontact',
-        'operating_unit'
+
     ],
     'data': [
         'data/base_setup.xml',         # load lang, currency

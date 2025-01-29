@@ -7,13 +7,13 @@
         <field name="arch" type="xml">
             <form string="IContact Form">
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                      <button name="open_hierarchy_view" icon="fa-users" type="object" invisible="(not parent_id and not child_ids) or parent_id == id">
-                            <div class="o_stat_info">
-                                <span class="o_stat_text">Org Chart</span>
-                            </div>
-                        </button>
-                    </div>
+<!--                    <div class="oe_button_box" name="button_box">-->
+<!--                      <button name="open_hierarchy_view" icon="fa-users" type="object" invisible="(not parent_id and not child_ids) or parent_id == id">-->
+<!--                            <div class="o_stat_info">-->
+<!--                                <span class="o_stat_text">Org Chart</span>-->
+<!--                            </div>-->
+<!--                        </button>-->
+<!--                    </div>-->
                     <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
                     <field name="image_1920" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     <div class="oe_title mb24">
@@ -40,7 +40,7 @@
                             <field name="gender" invisible="is_company"/>
                             <field name="title" options="{&quot;no_open&quot;: True}" placeholder="e.g. Mister" invisible="is_company"/>
                             <field name="function" placeholder="e.g. Sales Director" invisible="is_company"/>
-                            <field name="military_rank" invisible="contact_type != 'armed'"/>
+<!--                            <field name="military_rank" invisible="contact_type != 'armed'"/>-->
                             <field name="color" widget="color_picker" string="Color" groups="base.group_no_one"/>
                             <field name="lang" invisible="active_lang_count &lt;= 1"/>
                             <field name="category_id" widget="many2many_tags" options="{'color_field': 'color'}" placeholder="e.g. &quot;B2B&quot;, &quot;VIP&quot;, &quot;Consulting&quot;, ..."/>
@@ -61,6 +61,23 @@
                     </group>
 
                     <notebook colspan="4">
+                        <page string="Reporting info">
+                            <group>
+                                <group>
+                                    <field name="report_to_id"/>
+                                </group>
+                                <group>
+                                    <button name="button_reporting_hierarchy_view" icon="fa-users" type="object"
+                                            invisible="(not report_to_id and not report_to_child_ids) or parent_id == id">
+                                        <div class="o_stat_info">
+                                            <span class="o_stat_text">Reporting Chart</span>
+                                        </div>
+                                    </button>
+                                </group>
+                            </group>
+                            <label for="report_to_child_ids" invisible="'report_to_child_ids' == []"/>
+                            <field name="report_to_child_ids" invisible="'report_to_child_ids' == []"/>
+                        </page>
                         <page string="Additionnal information">
                             <group>
                                 <group>
@@ -72,6 +89,7 @@
                                     <field name="attitude_icrc" widget="priority"/>
                                 </group>
                             </group>
+
                         </page>
                         <page string="Contacts &amp; Addresses" name="contact_addresses" >
                             <field name="child_ids" mode="kanban" context="{'default_parent_id': id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'other'}">
@@ -186,7 +204,7 @@
                 <field name="contact_type"/>
                 <field name="name"/>
                 <field name="function"/>
-                <field name="report_to"/>
+                <field name="report_to_id"/>
                 <field name="email_private" groups="icrc_icontact.group_icontact_contributor"/>
                 <field name="phone"/>
                 <field name="social_media_1" widget="url" optional="hide"/>
@@ -196,21 +214,44 @@
         </field>
     </record>
 
-    <record id="action_open_hierarchy_view" model="ir.actions.act_window">
-        <field name="name">Org Chart</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_mode">hierarchy,list</field>
-        <field name="domain">[]</field>
-        <field name="context">{'chat_icon': True}</field>
-        <field name="view_id" eval="False"/>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Add a new contact
-            </p><p>
-                Quickly find all the information you need for your Partner such as contact data, job position, etc.
-            </p>
+    <record id="view_reporting_hierarchy" model="ir.ui.view">
+        <field name="name">res.partner.reporting.hierarchy</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <hierarchy child_field="report_to_child_ids">
+                <field name="name"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="hierarchy-box">
+                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4 o_hierarchy_node_color_{{ record.color.raw_value }}" t-att-title="report_to_id">
+                            <field name="image_1024" preview_image="image_128" options="{'zoom': true, 'zoom_delay': 1000}" widget="background_image"/>
+                        </div>
+                        <div class="o_hierarchy_node_body d-flex flex-column text-center">
+                            <div class="d-flex">
+                                <field class="fw-bold w-100" name="name"/>
+                            </div>
+                            <field name="function"/>
+                        </div>
+                    </t>
+                </templates>
+            </hierarchy>
         </field>
     </record>
+<!--    <record id="action_open_hierarchy_view" model="ir.actions.act_window">-->
+<!--        <field name="name">Org Chart</field>-->
+<!--        <field name="res_model">res.partner</field>-->
+<!--        <field name="view_mode">hierarchy,list</field>-->
+<!--        <field name="domain">[]</field>-->
+<!--        <field name="context">{'chat_icon': True}</field>-->
+<!--        <field name="view_id" eval="False"/>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_nocontent_smiling_face">-->
+<!--                Add a new contact-->
+<!--            </p><p>-->
+<!--                Quickly find all the information you need for your Partner such as contact data, job position, etc.-->
+<!--            </p>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <record id="view_stakeholder_list" model="ir.ui.view">
         <field name="name">res.partner.list.stakeholder</field>
@@ -234,79 +275,80 @@
         </field>
     </record>
 
-    <record id="view_stakeholder_hierarchy" model="ir.ui.view">
-        <field name="name">res.partner.view.hierarchy</field>
-        <field name="model">res.partner</field>
-        <field name="arch" type="xml">
-            <hierarchy child_field="child_ids">
-                <field name="name"/>
-                <field name="color"/>
-                <templates>
-                    <t t-name="hierarchy-box">
-                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4 o_hierarchy_node_color_{{ record.color.raw_value }}" t-att-title="parent_id">
-                            <field name="image_1024" preview_image="image_128" options="{'zoom': true, 'zoom_delay': 1000}" widget="background_image"/>
-                        </div>
-                        <div class="o_hierarchy_node_body d-flex flex-column text-center">
-                            <div class="d-flex">
-                                <field class="fw-bold w-100" name="name"/>
-                            </div>
-                            <field name="function"/>
-                        </div>
-                    </t>
-                </templates>
-            </hierarchy>
-        </field>
-    </record>
+<!--    <record id="view_stakeholder_hierarchy" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.view.hierarchy</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <hierarchy child_field="child_ids">-->
+<!--                <field name="name"/>-->
+<!--                <field name="color"/>-->
+<!--                <templates>-->
+<!--                    <t t-name="hierarchy-box">-->
+<!--                        <div t-attf-class="o_hierarchy_node_header d-flex justify-content-center pb-4 o_hierarchy_node_color_{{ record.color.raw_value }}" t-att-title="parent_id">-->
+<!--                            <field name="image_1024" preview_image="image_128" options="{'zoom': true, 'zoom_delay': 1000}" widget="background_image"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_hierarchy_node_body d-flex flex-column text-center">-->
+<!--                            <div class="d-flex">-->
+<!--                                <field class="fw-bold w-100" name="name"/>-->
+<!--                            </div>-->
+<!--                            <field name="function"/>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </templates>-->
+<!--            </hierarchy>-->
+<!--        </field>-->
+<!--    </record>-->
 
     <!-- Contact action definition -->
     <record id="action_icontact" model="ir.actions.act_window">
-        <field name="name">Icontact Form</field>
+        <field name="name">Icontact</field>
         <field name="res_model">res.partner</field>
         <field name="view_mode">kanban,list,form,activity</field>
         <field name="domain">[('is_company', '=', False)]</field>
+        <field name="context">{'default_is_company': False}</field>
     </record>
-
-    <record id="action_icontact_view_list" model="ir.actions.act_window.view">
-        <field name="sequence" eval="0"/>
-        <field name="view_mode">list</field>
-        <field name="view_id" ref="view_icontact_list"/>
-        <field name="act_window_id" ref="action_icontact"/>
-    </record>
-    <record id="action_icontact_view_form" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_icontact_form"/>
-        <field name="act_window_id" ref="action_icontact"/>
-    </record>
+        <record id="action_icontact_list" model="ir.actions.act_window.view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_icontact_list"/>
+            <field name="act_window_id" ref="action_icontact"/>
+        </record>
+        <record id="action_icontact_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_icontact_form"/>
+            <field name="act_window_id" ref="action_icontact"/>
+        </record>
 
     <!-- Stakeholder action definition -->
     <record id="action_stakeholder" model="ir.actions.act_window">
-        <field name="name">Stakeholder Action</field>
+        <field name="name">Stakeholder</field>
         <field name="res_model">res.partner</field>
-        <field name="view_mode">kanban,list,form,activity,hierarchy</field>
+        <field name="view_mode">kanban,list,form,activity</field>
         <field name="domain">[('is_company', '=', True)]</field>
+        <field name="context">{'default_is_company': True}</field>
     </record>
 
-    <record id="action_stakeholder_view_list" model="ir.actions.act_window.view">
-        <field name="sequence" eval="0"/>
-        <field name="view_mode">list</field>
-        <field name="view_id" ref="view_stakeholder_list"/>
-        <field name="act_window_id" ref="action_stakeholder"/>
-    </record>
+        <record id="action_stakeholder_list" model="ir.actions.act_window.view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_stakeholder_list"/>
+            <field name="act_window_id" ref="action_stakeholder"/>
+        </record>
 
-    <record id="action_stakeholder_view_form" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_icontact_form"/>
-        <field name="act_window_id" ref="action_stakeholder"/>
-    </record>
+        <record id="action_stakeholder_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_icontact_form"/>
+            <field name="act_window_id" ref="action_stakeholder"/>
+        </record>
 
-    <record id="action_stakeholder_view_hierarchy" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
-        <field name="view_mode">hierarchy</field>
-        <field name="view_id" ref="view_stakeholder_hierarchy"/>
-        <field name="act_window_id" ref="action_stakeholder"/>
-    </record>
+<!--    <record id="action_stakeholder_view_hierarchy" model="ir.actions.act_window.view">-->
+<!--        <field name="sequence" eval="1"/>-->
+<!--        <field name="view_mode">hierarchy</field>-->
+<!--        <field name="view_id" ref="view_stakeholder_hierarchy"/>-->
+<!--        <field name="act_window_id" ref="action_stakeholder"/>-->
+<!--    </record>-->
 
     <menuitem id="menu_icontact_stakeholder_form"
               name="Stakeholder"

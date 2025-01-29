@@ -1,5 +1,5 @@
 <odoo>
-
+    <!-- inherit base_partner views -->
     <record id="res_partner_tree_list" model="ir.ui.view">
         <field name="name">res.partner_list</field>
         <field name="model">res.partner</field>
@@ -11,11 +11,11 @@
                     widget="many2many_tags"
                     domain="[('user_ids', 'in', uid)]"
                     groups="operating_unit.group_multi_operating_unit"
+                    optional="hide"
                 />
             </field>
         </field>
     </record>
-
     <record id="res_partner_only_form_view" model="ir.ui.view">
         <field name="name">res.partner_form</field>
         <field name="model">res.partner</field>
@@ -34,7 +34,6 @@
             </xpath>
         </field>
     </record>
-
     <record id="res_partner_search_view" model="ir.ui.view">
         <field name="name">res.partner_filter</field>
         <field name="model">res.partner</field>
@@ -49,4 +48,46 @@
         </field>
     </record>
 
+    <!-- inherti icontact views -->
+    <record id="view_icontact_form" model="ir.ui.view">
+        <field name="name">res.partner_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="icrc_icontact.view_icontact_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='category_id']"
+                position="after"
+            >
+                <field
+                    name="operating_unit_ids"
+                    domain="[('user_ids', 'in', uid)]"
+                    groups="operating_unit.group_multi_operating_unit"
+                    widget="many2many_tags"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="res_icontact_list" model="ir.ui.view">
+        <field name="name">res.partner_list</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="icrc_icontact.view_icontact_list" />
+        <field name="arch" type="xml">
+            <field name="social_media_3" position="after">
+                <field
+                    name="operating_unit_ids"
+                    widget="many2many_tags"
+                    domain="[('user_ids', 'in', uid)]"
+                    groups="operating_unit.group_multi_operating_unit"
+                    optional="hide"
+                />
+            </field>
+        </field>
+    </record>
+    <!-- Additioal menuitem for iContacts -->
+    <menuitem
+        action="operating_unit.action_operating_unit_tree"
+        id="menu_action_operating_unit_tree"
+        parent="icrc_icontact.menu_icontact_config"
+        sequence="2"
+    />
 </odoo>
