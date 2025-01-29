@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_admin_level_01_user,access_admin_level_01 User,model_admin_level_01,icrc_icontact.group_icontact_contributor,1,0,0,0
+access_admin_level_01_manager,access_admin_level_01 Manager,model_admin_level_01,icrc_icontact.group_icontact_manager,1,1,1,1
+access_admin_level_02_user,access_admin_level_02 User,model_admin_level_02,icrc_icontact.group_icontact_contributor,1,0,0,0
+access_admin_level_02_manager,access_admin_level_02 Manager,model_admin_level_02,icrc_icontact.group_icontact_manager,1,1,1,1
+access_admin_level_03_user,access_admin_level_03 User,model_admin_level_03,icrc_icontact.group_icontact_contributor,1,0,0,0
+access_admin_level_03_manager,access_admin_level_03 Manager,model_admin_level_03,icrc_icontact.group_icontact_manager,1,1,1,1
+access_admin_locality_user,access_admin_locality User,model_admin_locality,icrc_icontact.group_icontact_contributor,1,0,0,0
+access_admin_locality_manager,access_admin_locality Manager,model_admin_locality,icrc_icontact.group_icontact_manager,1,1,1,1

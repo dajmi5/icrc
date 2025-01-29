@@ -1,0 +1,232 @@
+<odoo>
+    <!-- Admin level 01 -->
+    <record id="view_admin_level_01_form" model="ir.ui.view">
+        <field name="name">icrc.view_admin_level_01_form.form</field>
+        <field name="model">admin.level.01</field>
+        <field name="arch" type="xml">
+            <form string="Admin Level 01">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="country_id"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Level 2">
+                            <field name="child_2_ids"/>
+                        </page>
+                        <page string="Level 3">
+                            <field name="child_3_ids"/>
+                        </page>
+                        <page string="Localities">
+                            <field name="locality_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_admin_level_01_list" model="ir.ui.view">
+        <field name="name">view_admin_level_01_list</field>
+        <field name="model">admin.level.01</field>
+        <field name="arch" type="xml">
+            <list string="Admin Level 01">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="country_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Admin level 02 -->
+    <record id="view_admin_level_02_form" model="ir.ui.view">
+        <field name="name">icrc.view_admin_level_02_form.form</field>
+        <field name="model">admin.level.02</field>
+        <field name="arch" type="xml">
+            <form string="Admin Level 02">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="lvl_1_id"/>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="country_id"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Level 3">
+                            <field name="child_3_ids"/>
+                        </page>
+                        <page string="Localities">
+                            <field name="locality_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_admin_level_02_list" model="ir.ui.view">
+        <field name="name">view_admin_level_02_list</field>
+        <field name="model">admin.level.02</field>
+        <field name="arch" type="xml">
+            <list string="Admin Level 01">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="country_id"/>
+                <field name="lvl_1_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Admin level 03 -->
+    <record id="view_admin_level_03_form" model="ir.ui.view">
+        <field name="name">icrc.view_admin_level_03_form.form</field>
+        <field name="model">admin.level.03</field>
+        <field name="arch" type="xml">
+            <form string="Admin Level 03">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="lvl_1_id"/>
+                            <field name="lvl_2_id"/>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="country_id"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Localities">
+                            <field name="locality_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_admin_level_03_list" model="ir.ui.view">
+        <field name="name">view_admin_level_03_list</field>
+        <field name="model">admin.level.03</field>
+        <field name="arch" type="xml">
+            <list string="Admin Level 03">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="country_id"/>
+                <field name="lvl_1_id"/>
+                <field name="lvl_2_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Locality -->
+    <record id="view_admin_locality_form" model="ir.ui.view">
+        <field name="name">view_admin_locality_form</field>
+        <field name="model">admin.locality</field>
+        <field name="arch" type="xml">
+            <form string="Locality">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="local_name"/>
+                        </group>
+                        <group>
+                            <field name="country_id"/>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                        <group>
+                            <field name="lvl_1_id"/>
+                            <field name="lvl_2_id"/>
+                            <field name="lvl_3_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_admin_locality_list" model="ir.ui.view">
+        <field name="name">view_admin_locality_form</field>
+        <field name="model">admin.locality</field>
+        <field name="arch" type="xml">
+            <list string="Localities">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="local_name"/>
+                <field name="latitude"/>
+                <field name="longitude"/>
+                <field name="country_id"/>
+                <field name="lvl_1_id"/>
+                <field name="lvl_2_id"/>
+                <field name="lvl_3_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_admin_level_01_tree" model="ir.actions.act_window">
+        <field name="name">Admin Level 01</field>
+        <field name="res_model">admin.level.01</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_admin_level_02_tree" model="ir.actions.act_window">
+        <field name="name">Admin Level 02</field>
+        <field name="res_model">admin.level.02</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_admin_level_03_tree" model="ir.actions.act_window">
+        <field name="name">Admin Level 03</field>
+        <field name="res_model">admin.level.03</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_admin_locality_tree" model="ir.actions.act_window">
+        <field name="name">Admin Leocalities</field>
+        <field name="res_model">admin.locality</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_icrc_referential"
+              name="ICRC Referentials"
+              parent="icrc_icontact.menu_icontact_config"
+              sequence="10"
+    />
+    <menuitem id="menu_admin_level_01"
+              name="Admin Level 01"
+              parent="menu_icrc_referential"
+              action="action_admin_level_01_tree"
+              sequence="1"
+    />
+    <menuitem id="menu_admin_level_02"
+              name="Admin Level 02"
+              parent="menu_icrc_referential"
+              action="action_admin_level_02_tree"
+              sequence="2"
+    />
+    <menuitem id="menu_admin_level_03"
+              name="Admin Level 03"
+              parent="menu_icrc_referential"
+              action="action_admin_level_03_tree"
+              sequence="3"
+    />
+    <menuitem id="menu_admin_locality"
+            name="Localities"
+            action="action_admin_locality_tree"
+            parent="menu_icrc_referential"
+            sequence="4"
+        />
+
+
+</odoo>
