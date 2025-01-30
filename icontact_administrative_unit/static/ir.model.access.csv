@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_military_rank_user,access_military_rank,model_military_rank,icrc_icontact.group_icontact_contributor,1,0,0,0
-access_military_rank_manager,access_military_rank,model_military_rank,icrc_icontact.group_icontact_manager,1,1,1,1
