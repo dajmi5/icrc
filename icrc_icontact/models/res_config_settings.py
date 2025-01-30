@@ -7,3 +7,4 @@ class ResConfigSettings(models.TransientModel):
     module_icontact_administrative_unit = fields.Boolean(string="Administrative units management")
     module_icontact_adminlevel = fields.Boolean(string="Administrative levels")
     module_icontact_operating_unit = fields.Boolean(string="Operating units on partner")
+    module_icontact_multi_relation = fields.Boolean(string="Multi relation management partner")
