@@ -1,0 +1,24 @@
+<odoo>
+<record id="view_icontact_administrative_unit_form" model="ir.ui.view">
+    <field name="name">icontact_administrative_unit_form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="icrc_icontact.view_icontact_form"/>
+    <field name="arch" type="xml">
+        <field name="contact_type" position="after">
+            <field name="administrative_unit_id"
+                   invisible="contact_type != 'armed'"
+                   required="contact_type == 'armed'"/>
+        </field>
+    </field>
+</record>
+<record id="view_icontact_administrative_unit_list" model="ir.ui.view">
+    <field name="name">icontact_administrative_unit_list</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="icrc_icontact.view_icontact_list"/>
+    <field name="arch" type="xml">
+        <field name="contact_type" position="after">
+            <field name="administrative_unit_id" optional="hide"/>
+        </field>
+    </field>
+</record>
+</odoo>

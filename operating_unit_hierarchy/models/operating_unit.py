@@ -6,8 +6,9 @@ from odoo import api, fields, models
 
 
 class OperatingUnit(models.Model):
-
     _inherit = "operating.unit"
+    # _parent_name = 'parent_id'
+    # _parent_store = True
 
     parent_id = fields.Many2one("operating.unit", "Parent")
     child_ids =fields.One2many("operating.unit","parent_id","Childs")
