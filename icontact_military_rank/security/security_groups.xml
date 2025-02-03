@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="group_military_rank" model="ir.module.category">
+        <field name="name">Military Access</field>
+        <field name="description">Security category for giving access to Military function</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Readonly Group -->
+    <record id="group_military_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="icontact_military_rank.group_military_rank"/>
+        <field name="comment">Group with readonly access</field>
+    </record>
+
+    <!-- Full access Group -->
+    <record id="group_military_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="icontact_military_rank.group_military_rank"/>
+        <field name="comment">Group with full access</field>
+        <field name="implied_ids" eval="[(4, ref('icontact_military_rank.group_military_user'))]"/>
+    </record>
+
+
+</odoo>
